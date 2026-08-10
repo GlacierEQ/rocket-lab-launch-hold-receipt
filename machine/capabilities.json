@@ -1,0 +1,12 @@
+{
+  "schema": "glaciereq.repo-capabilities.v1",
+  "repository": "GlacierEQ/rocket-lab-launch-hold-receipt",
+  "capabilities": [
+    {
+      "id": "launch-hold-receipt",
+      "name": "Launch Hold Receipt",
+      "status": "SCAFFOLD",
+      "module": "src/launch_hold_receipt.py"
+    }
+  ]
+}

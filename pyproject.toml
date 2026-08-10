@@ -1,0 +1,10 @@
+[project]
+name = "rocket-lab-launch-hold-receipt"
+version = "0.0.1"
+description = "Scaffold: Launch Hold Receipt (independent Rocket Lab lens)"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/rocket-lab-launch-hold-receipt",
+  "source_sha": "37d6009eee03cdadad0103c5a54f582b286d180119403f1e3318d04dfac58123",
+  "proof_receipt_digest": "8e905909766b835ebe916a0412511e030a40dbd402d5a75a4ebceace5f630bad",
+  "not_after": 1788948689.64415,
+  "mac": "871f47e0442e981126f596f48ac6965548c523fc7ccb99378edf6fe35f59d7d9",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}
