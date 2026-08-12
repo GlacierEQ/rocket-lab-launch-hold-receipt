@@ -1,51 +1,47 @@
 # Launch Hold Receipt
 
-Independent GlacierEQ portfolio exhibit aligned to **Rocket Lab** operating themes.
+Independent GlacierEQ portfolio implementation aligned to **Rocket Lab** operating themes.
 
-> **Not affiliated.** This repository is not affiliated with, endorsed by, employed by, or deployed at Rocket Lab.
-> No proprietary access, production deployment, customer impact, or company partnership is claimed.
+> **Not affiliated.** This repository is not affiliated with, endorsed by, employed by, or deployed at Rocket Lab. No proprietary access, production deployment, customer impact, or company partnership is claimed.
 
-## Bottleneck (GlacierEQ hypothesis)
+## Purpose
 
-Maintaining one reliable software lifecycle across vehicles, spacecraft, test, simulation, and operations.
+Represent mission/release holds as verifiable state, not chat or checklist folklore. A hold must identify its authority, scope, reasons, evidence, issue time, and expiry; progression remains blocked until the exact hold expires or receives a correctly bound clearance.
 
-**Brick wall:** Versioning and validating mission-critical software as products and missions diversify.
+## Implemented protocol
 
-**Observed public pressure (snapshot hypothesis):** Launch and spacecraft products require integrated flight software, simulation, ground systems, and rapid mission cadence.
+`LaunchHoldReceipt` supports three transitions:
 
-## Innovation mechanism
+- **issue**: authorized authority signs an HMAC-bound hold over scope, reason codes, evidence digest, issue time and expiry;
+- **clear**: an authority permitted for that scope signs a clearance bound to the exact hold signature and new evidence;
+- **check**: verifies signatures and binding, then returns `BLOCKED`, `CLEARED`, or `EXPIRED`.
 
-**Launch Hold Receipt** — Encode hold reasons, authority, and expiry into a signed hold receipt that blocks progression until cleared.
+It fails closed on unauthorized scope, missing signing authority, invalid signatures, bad expiry ordering, clearance mismatch, future clearance, and malformed evidence.
 
-## Target roles
+## Run
 
-- Applied AI Systems Architect
-- Forward-Deployed Engineer
-- AI Infrastructure / Governance Engineer
+```bash
+python -m pytest -q
+python scripts/operate.py
+```
 
-## Application move
+Build/install:
 
-Build a flight-software release and simulation evidence case study.
+```bash
+python -m pip install build
+python -m build
+python -m pip install dist/*.whl
+launch-hold-receipt
+```
 
-## Current scaffold state
+## Proof surface
 
-This leaf is a **scaffold**: contracts, tests, and a stub mechanism exist so another engineer/AI can fill production-grade code without inventing company affiliation.
+- `src/launch_hold_receipt.py` — signed hold/clear/check protocol
+- `src/launch_hold_cli.py` — installable demo execution surface
+- `tests/test_launch_hold_receipt.py` — authority, block, expiry, clearance and tamper behavior
+- `.github/workflows/tests.yml` — tests + cold-start + wheel build/install + installed CLI
+- `machine/` — existing Helix control-plane/promotion surfaces remain preserved
 
-| Surface | Path |
-|---------|------|
-| Mechanism stub | `src/launch_hold_receipt.py` |
-| Operate entry | `scripts/operate.py` |
-| Contract tests | `tests/` |
-| Target contract | `machine/target-contract.json` |
-| **AI fill-in brief** | **`DEV_UP_INSTRUCTIONS.md`** |
-| Issue contract | `ISSUE_CONTRACT.md` |
+## Current boundary
 
-## Non-claims
-
-- No Rocket Lab employment, endorsement, proprietary data, or production use
-- No customer, revenue, latency, or scale claims without separate receipts
-- Scaffold tests define **intended behavior**, not verified production excellence
-
-## Next gate
-
-Choose one mission thread and validate every interface and test boundary.
+This is a vendor-neutral protocol using injected authority secrets/scopes. It does not control Rocket Lab systems or claim flight use. A further deployment step is a permitted release/simulation orchestrator adapter that refuses stage progression while a verified hold is active.
