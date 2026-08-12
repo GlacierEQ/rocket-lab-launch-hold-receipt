@@ -1,10 +1,21 @@
+[build-system]
+requires=["setuptools>=68"]
+build-backend="setuptools.build_meta"
+
 [project]
-name = "rocket-lab-launch-hold-receipt"
-version = "0.0.1"
-description = "Scaffold: Launch Hold Receipt (independent Rocket Lab lens)"
-requires-python = ">=3.11"
-dependencies = []
+name="rocket-lab-launch-hold-receipt"
+version="1.0.0"
+description="Signed launch hold, clearance, expiry, and progression protocol"
+requires-python=">=3.11"
+dependencies=[]
+
+[project.scripts]
+launch-hold-receipt="launch_hold_cli:main"
+
+[tool.setuptools]
+py-modules=["launch_hold_receipt","launch_hold_cli","promotion_authority"]
+package-dir={""="src"}
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["src"]
+testpaths=["tests"]
+pythonpath=["src"]
