@@ -4,12 +4,12 @@
   "source_sha": "37d6009eee03cdadad0103c5a54f582b286d180119403f1e3318d04dfac58123",
   "proof_id": "elite-rocket-lab-launch-hold-receipt-1786356689",
   "environment": {
-    "python": "/Users/kcbflux/.local/bin/python3.11",
-    "PYTHONPATH": "/Users/kcbflux/GlacierEQ_Swarm/job-app/repos/rocket-lab-launch-hold-receipt:/Users/kcbflux/GlacierEQ_Swarm/job-app/repos/rocket-lab-launch-hold-receipt/src",
+    "python": "${HOME}/.local/bin/python3.11",
+    "PYTHONPATH": "${HOME}/GlacierEQ_Swarm/job-app/repos/rocket-lab-launch-hold-receipt:${HOME}/GlacierEQ_Swarm/job-app/repos/rocket-lab-launch-hold-receipt/src",
     "entry": "unittest"
   },
   "tests": [
-    "/Users/kcbflux/.local/bin/python3.11 -m unittest discover -s tests -v (x2)"
+    "${HOME}/.local/bin/python3.11 -m unittest discover -s tests -v (x2)"
   ],
   "adversarial_tests": [
     "tests/test_adversarial.py"
